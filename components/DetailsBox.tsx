@@ -11,7 +11,7 @@ import ConnectWallet from "./ConnectWallet";
 
 const WrapperDetailsBox = styled.div`
     max-width: 379px;
-    min-width: 360px;
+    min-width: 288px;
     width: 100%;
     height: 380px;
     background: ${({ theme }) => theme.colors?.["secondary_10"]};

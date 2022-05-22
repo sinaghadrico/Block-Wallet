@@ -8,7 +8,7 @@ import TransactionLink from "components/TransactionLink";
 
 const WrapperSuccessBox = styled.div`
     max-width: 379px;
-    min-width: 360px;
+    min-width: 288px;
     width: 100%;
     height: 380px;
     background: ${({ theme }) => theme.colors?.["secondary_10"]};
@@ -27,7 +27,7 @@ export function SuccessBox({ txHash }: { txHash: string }) {
     const { push } = useRouter();
 
     return (
-        <WrapperSuccessBox>
+        <WrapperSuccessBox className="m-auto">
             <Icon src="trade" />
             <Text.h1 className="py-3 text-center">Success.</Text.h1>
             <Text.h3 className="py-3 text-center">You've successfully sent your funds.</Text.h3>
