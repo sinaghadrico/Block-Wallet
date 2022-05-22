@@ -6,8 +6,10 @@ import { useRouter } from "next/router";
 import { useWeb3React } from "@web3-react/core";
 import useWallet from "services/useWallet";
 import useSWR from "swr";
+import { addCustomToken } from "chains";
+import ConnectWallet from "./ConnectWallet";
 
-const WrapperDetailsBox = styled.a`
+const WrapperDetailsBox = styled.div`
     max-width: 379px;
     min-width: 360px;
     width: 100%;
@@ -28,36 +30,29 @@ export function DetailsBox() {
     const { push } = useRouter();
     const { account } = useWeb3React();
     const { getBalance, getTokenName } = useWallet(account);
-    const { data: balance } = useSWR(!!account ? [`getBalance-${account}`, account] : null, getBalance, {
-        revalidateOnMount: true,
-        revalidateOnFocus: false,
-    });
-    const { data: tokenName } = useSWR(!!account ? [`getTokenName`] : null, getTokenName, {
-        revalidateOnMount: true,
-        revalidateOnFocus: false,
-    });
+    const { data: balance } = useSWR(!!account ? [`getBalance-${account}`, account] : null, getBalance);
+    const { data: tokenName } = useSWR(!!account ? [`getTokenName`] : null, getTokenName);
     return (
-        <WrapperDetailsBox
-            href="/send"
-            onClick={(e) => {
-                e.preventDefault();
-                push("/send");
-            }}
-        >
+        <WrapperDetailsBox>
             <Icon src="wallet" />
-            <Text.h3 className="pt-10 pb-1 text-center">Wallet</Text.h3>
-            <Text.h1 className="py-1 text-center">
+            <ConnectWallet type="icon" className="pt-5 " />
+            <Text.h1 className="py-3 text-center">
                 Balance : {balance}({tokenName}){" "}
             </Text.h1>
-
             <Button
                 onClick={() => {
                     push("/send");
                 }}
                 color="blue"
             >
-                Send
+                Send Token
             </Button>
+            <Text.h4 color="secondary" className="pt-5">
+                haven't ({tokenName}) token on your wallet ?{" "}
+            </Text.h4>
+            <Text.span color="yellow" className="underline" onClick={addCustomToken}>
+                Please click to add
+            </Text.span>{" "}
         </WrapperDetailsBox>
     );
 }

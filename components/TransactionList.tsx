@@ -1,7 +1,5 @@
 import { Text } from "@ui-components/Text";
 import { Box } from "@ui-components/Box";
-import { Icon } from "@ui-components/Icon";
-import ConnectWallet from "./ConnectWallet";
 import { DetailsBox } from "./DetailsBox";
 import { Table } from "@ui-components/Table";
 import { useWeb3React } from "@web3-react/core";
@@ -11,14 +9,11 @@ import useSWR from "swr";
 export default function TransactionList() {
     const { account } = useWeb3React();
     const { getTransactionList } = useWallet(account);
-    const { data, error } = useSWR(!!account ? [`getTransactionList-${account}`, account] : null, getTransactionList, {
-        revalidateOnMount: true,
-        revalidateOnFocus: false,
-    });
+    const { data } = useSWR(!!account ? [`getTransactionList-${account}`, account] : null, getTransactionList);
     const columns = {
         from: {
-            label: "from",
-            render: (value, record) => {
+            label: "Type",
+            render: (value) => {
                 return (
                     <Text.h2 className="flex">
                         {" "}
@@ -28,7 +23,7 @@ export default function TransactionList() {
             },
         },
         value: {
-            label: "value",
+            label: "Value",
             render: (value, record) => {
                 return (
                     <Text.h2 className="flex">
@@ -39,14 +34,14 @@ export default function TransactionList() {
             },
         },
         timeStamp: {
-            label: "timeStamp",
-            render: (value, record) => {
+            label: "Time",
+            render: (value) => {
                 return <Text.h2 className="flex"> {value}</Text.h2>;
             },
         },
         to: {
-            label: "to",
-            render: (value, record) => {
+            label: "To",
+            render: (value) => {
                 return (
                     <Text.h2 className="flex">
                         {" "}
@@ -60,17 +55,11 @@ export default function TransactionList() {
     };
 
     return (
-        <Box style={{ maxWidth: 447, width: "100%" }} className="h-screen ">
-            <div className=" flex flex-col  md:flex-col lg:flex-row justify-center">
-                <div className="box-left-header flex flex-col  md:flex-col lg:flex-row self-center py-5">
-                    <ConnectWallet type="icon" />
-                </div>
-            </div>
+        <Box>
             <div className=" flex flex-row justify-center">
                 <DetailsBox />
             </div>
-
-            <Table columns={columns} items={data} color="blue" />
+            <Table columns={columns} items={data || []} color="blue" />
         </Box>
     );
 }

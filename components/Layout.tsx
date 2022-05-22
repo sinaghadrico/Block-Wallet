@@ -4,9 +4,11 @@ import { useRouter } from "next/router";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
+import { useWeb3React } from "@web3-react/core";
 
 export default function Layout({ children }) {
     const { asPath } = useRouter();
+    const { chainId } = useWeb3React();
 
     const [loading, SetLoading] = useState(false);
 
@@ -28,7 +30,7 @@ export default function Layout({ children }) {
     const Container = styled.div`
         display: flex;
         flex-direction: column;
-        background-color: ${({ theme }) => theme.colors?.["primary"]};
+        background-color: ${({ theme }) => theme.colors?.["black"]};
         background-repeat: no-repeat;
         background-size: cover;
         padding: 0px;

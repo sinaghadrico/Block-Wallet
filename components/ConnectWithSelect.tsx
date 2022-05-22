@@ -5,6 +5,7 @@ import { Network } from "@web3-react/network";
 import { WalletConnect } from "@web3-react/walletconnect";
 import { useCallback, useState } from "react";
 import { CHAINS, getAddChainParameters, URLS } from "../chains";
+import { ChainIdNotAllowedError } from "@web3-react/store";
 
 import { Button } from "@ui-components/Button";
 
@@ -88,14 +89,16 @@ export function ConnectWithSelect({
                     fontSize="16px"
                     color="blue"
                     onClick={() =>
-                        connector instanceof WalletConnect || connector instanceof Network
+                        error instanceof ChainIdNotAllowedError
+                            ? switchChain(4)
+                            : connector instanceof WalletConnect || connector instanceof Network
                             ? void connector.activate(desiredChainId === -1 ? undefined : desiredChainId)
                             : void connector.activate(
                                   desiredChainId === -1 ? undefined : getAddChainParameters(desiredChainId),
                               )
                     }
                 >
-                    Try Again?
+                    {error instanceof ChainIdNotAllowedError ? `Switch To ${CHAINS[4].name}` : "Try Again?"}
                 </Button>
             </div>
         );

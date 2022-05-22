@@ -39,7 +39,6 @@ export const useERC20Contract = (): WrappedERC20Token | undefined => {
 
 export const useERC20 = () => {
     const contract = useERC20Contract();
-    const { account } = useWeb3React();
 
     const getBalanceOf = (account: string) => {
         return new Promise<number>((resolve) => {
@@ -56,9 +55,9 @@ export const useERC20 = () => {
     };
     const getName = () => {
         return new Promise<string>((resolve) => {
-            contract.symbol()
+            contract
+                .symbol()
                 .then((name: string) => {
-   
                     resolve(name);
                 })
                 .catch((error: any) => {
@@ -67,21 +66,23 @@ export const useERC20 = () => {
         });
     };
     const transfer = (recipient: string, amount: string) => {
-        return new Promise<number>((resolve) => {
+        return new Promise<number>((resolve, reject) => {
             const amountValue = toTokenValue(amount);
 
             contract
-                ?.transfer(recipient, amountValue, { from: account })
-                ?.then((balance: any) => {
-                    debugger;
-                    // const value = parseTokenValue(balance);
-
-                    // resolve(value);
+                ?.transfer(recipient, amountValue)
+                ?.then((transactionTransfer: any) => {
+                    transactionTransfer
+                        .wait(1)
+                        .then(() => {
+                            resolve(transactionTransfer);
+                        })
+                        .catch((error: any) => {
+                            reject(error);
+                        });
                 })
                 .catch((error: any) => {
-                    debugger;
-                    // console.log(error);
-                    // resolve(0);
+                    reject(error);
                 });
         });
     };

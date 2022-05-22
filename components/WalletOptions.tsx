@@ -22,7 +22,7 @@ export default function WalletOptions() {
     `;
 
     return (
-        <Box style={{ maxWidth: 447, width: "100%" }} className="h-screen">
+        <Box style={{ maxWidth: 447, width: "100%" }} className="m-auto">
             <WrapperWalletOptions>
                 <Icon src="wallet" />
                 {isActive ? (

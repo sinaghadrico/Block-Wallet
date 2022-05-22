@@ -161,7 +161,7 @@ export default function MyApp({ Component, pageProps }) {
       padding: 0;
       box-sizing: border-box;
       color: ${theme.colors?.["primary"]};
-      filter: invert(1) hue-rotate(180deg);
+      /* filter: invert(1) hue-rotate(180deg); */
   
       ::-webkit-scrollbar {
               width: 8px;

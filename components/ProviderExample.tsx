@@ -35,7 +35,7 @@ function Child() {
 export default function ProviderExample(props) {
     return (
         <Web3ReactProvider connectors={connectors}>
-            {/* <Child /> */}
+            <Child />
             <WebWalletProvider {...props} />
         </Web3ReactProvider>
     );

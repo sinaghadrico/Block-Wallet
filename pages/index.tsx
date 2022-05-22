@@ -5,20 +5,20 @@ import { useWeb3React } from "@web3-react/core";
 import TransactionList from "components/TransactionList";
 
 export default function Home() {
-    const { account } = useWeb3React();
+    const { isActive } = useWeb3React();
 
     return (
-        <div className="flex min-h-screen flex-col items-center content-center   ">
+        <div className="flex min-h-screen flex-col items-center content-center  ">
             <Head>
                 <title>BlockWallet | Home</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
-            {!account ? (
+            {!isActive ? (
                 <WalletOptions />
             ) : (
-                <div className="flex flex-col  md:flex-col lg:flex-row self-center">
+                <div className="flex flex-col  md:flex-col lg:flex-row self-center m-auto ">
                     <TransactionList />
                 </div>
             )}

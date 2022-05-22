@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import type { TableHTMLAttributes } from "react";
-
 interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
     color?: "blue" | "purpleLighter" | "green";
     columns: {
@@ -47,39 +46,102 @@ export function Table({ color = "blue", columns, items, ...restProps }: TablePro
         padding: 0px 8px;
     `;
     const CustomTableTr = styled.tr`
-        background: ${({ theme }) => theme.colors?.["secondary_10"]};
         td {
             text-align: left;
             padding: 12px;
-            :first-child {
-                border-radius: ${({ open }) => (open ? "16px 0 0 0" : "16px 0 0 16px")};
+
+            @media (min-width: 760px) {
+                margin: 0.5em 1em;
+                :first-child {
+                    border-radius: 16px 0 0 16px;
+                }
+                :last-child {
+                    border-radius: 0 16px 16px 0;
+                }
             }
-            :last-child {
-                border-radius: ${({ open }) => (open ? "0 16px 0 0" : "0 16px 16px 0")};
+            /* &:not(.isMobile) {
+                margin: 0.5em 1em;
+                :first-child {
+                    border-radius: 16px 0 0 16px;
+                }
+                :last-child {
+                    border-radius: 0 16px 16px 0;
+                }
+            } */
+
+            /* &.isMobile {
+                :first-child {
+                    border-radius: 16px 16px 0 0;
+                }
+                :last-child {
+                    border-radius: 0 0 16px 16px;
+                }
+            } */
+            @media (max-width: 760px) {
+                :first-child {
+                    border-radius: 16px 16px 0 0;
+                }
+                :last-child {
+                    border-radius: 0 0 16px 16px;
+                }
             }
         }
-        /* @media (max-width: 1350px) { */
+
         td {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 0.5em 1em;
+            background: ${({ theme }) => theme.colors?.["secondary_10"]};
+
+            /* &:not(.isMobile) {
+                margin: 0.5em 1em;
+            } */
+            @media (min-width: 760px) {
+                margin: 0.5em 1em;
+            }
+            @media (max-width: 760px) {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &:before {
+                    content: attr(data-th) " ";
+                    display: flex;
+                    font-weight: bold;
+                    align-items: center;
+                    color: ${({ theme }) => theme.colors?.["black_secondary"]};
+                    font-size: ${({ theme }) => theme.fonts?.["lg"]?.["size"]};
+                }
+            }
+
+            /* &.isMobile {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                &:before {
+                    content: attr(data-th) " ";
+                    display: flex;
+                    font-weight: bold;
+                    align-items: center;
+                    color: ${({ theme }) => theme.colors?.["black_secondary"]};
+                    font-size: ${({ theme }) => theme.fonts?.["lg"]?.["size"]};
+                }
+            } */
         }
-        /* } */
     `;
     return (
         <CustomWrapperTable color={color}>
-            <CustomTable>
-                {items?.map((item, itemIndex) => (
-                    <CustomTableTr key={itemIndex} open={open}>
-                        {Object.keys(columns)?.map((column) => (
-                            <td key={`${column}-${itemIndex}`}>
-                                {columns[column].render ? columns[column].render(item[column], item) : item[column]}
-                            </td>
-                        ))}
-                    </CustomTableTr>
-                ))}
-            </CustomTable>
+            {items.length === 0 ? (
+                <div className="text-center my-24">There is no transactions</div>
+            ) : (
+                <CustomTable>
+                    {items?.map((item, itemIndex) => (
+                        <CustomTableTr key={itemIndex} open={open}>
+                            {Object.keys(columns)?.map((column) => (
+                                <td key={`${column}-${itemIndex}`} data-th={columns[column].label}>
+                                    {columns[column].render ? columns[column].render(item[column], item) : item[column]}
+                                </td>
+                            ))}
+                        </CustomTableTr>
+                    ))}
+                </CustomTable>
+            )}
         </CustomWrapperTable>
     );
 }

@@ -9,7 +9,7 @@ interface BoxProps {
 
 const WrapperBox = memo(styled.div`
     width: fit-content;
-    background: ${({ theme }) => theme.colors?.["black_secondary"]};
+    background: ${({ theme }) => theme.colors?.["secondary_10"]};
     border-radius: 48px;
     padding: 20px;
 `);
