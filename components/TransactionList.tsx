@@ -5,6 +5,7 @@ import { Table } from "@ui-components/Table";
 import { useWeb3React } from "@web3-react/core";
 import useWallet from "services/useWallet";
 import useSWR from "swr";
+import { fromUnixTime, format } from "date-fns";
 
 export default function TransactionList() {
     const { account } = useWeb3React();
@@ -15,10 +16,10 @@ export default function TransactionList() {
             label: "Type",
             render: (value) => {
                 return (
-                    <Text.h2 className="flex">
+                    <Text.p className="flex">
                         {" "}
                         {value?.toLowerCase() === account?.toLowerCase() ? "Send" : "Receive"}
-                    </Text.h2>
+                    </Text.p>
                 );
             },
         },
@@ -26,29 +27,38 @@ export default function TransactionList() {
             label: "Value",
             render: (value, record) => {
                 return (
-                    <Text.h2 className="flex">
+                    <Text.p className="flex">
                         {" "}
                         {value} ({record?.tokenSymbol})
-                    </Text.h2>
+                    </Text.p>
                 );
             },
         },
         timeStamp: {
             label: "Time",
             render: (value) => {
-                return <Text.h2 className="flex"> {value}</Text.h2>;
+                const result = fromUnixTime(value);
+
+                return (
+                    <Text.p className="flex">
+                        <span>
+                            {" "}
+                            <> {format(result, "yyyy-MM-dd   HH:mm:ss")}</>
+                        </span>
+                    </Text.p>
+                );
             },
         },
         to: {
             label: "To",
             render: (value) => {
                 return (
-                    <Text.h2 className="flex">
+                    <Text.p className="flex">
                         {" "}
                         <span style={{ maxWidth: 200, margin: 0, overflow: "hidden", textOverflow: "ellipsis" }}>
                             {value}
                         </span>{" "}
-                    </Text.h2>
+                    </Text.p>
                 );
             },
         },

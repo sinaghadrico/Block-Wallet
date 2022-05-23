@@ -8,7 +8,12 @@ import TransactionLink from "components/TransactionLink";
 
 const WrapperSuccessBox = styled.div`
     max-width: 379px;
-    min-width: 288px;
+    @media (min-width: 760px) {
+        min-width: 360px;
+    }
+    @media (max-width: 760px) {
+        min-width: 288px;
+    }
     width: 100%;
     height: 380px;
     background: ${({ theme }) => theme.colors?.["secondary_10"]};
@@ -20,7 +25,6 @@ const WrapperSuccessBox = styled.div`
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    cursor: pointer;
 `;
 
 export function SuccessBox({ txHash }: { txHash: string }) {

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import type { ReactNode, FC } from "react";
+import type { CSSProperties } from "react";
 import { memo } from "react";
 interface BoxProps {
-    children: ReactNode;
+    children: JSX.Element | JSX.Element[];
     className?: string;
-    style?: any;
+    style?: CSSProperties;
 }
 
 const WrapperBox = memo(styled.div`

@@ -63,7 +63,7 @@ Text.h1 = function h1({ size = "xl", color = "primary", children, ...restProps }
         </Text>
     );
 };
-Text.h2 = function h2({ size = "base", color = "primary", children, ...restProps }: TextInlineProps) {
+Text.h2 = function h2({ size = "lg", color = "primary", children, ...restProps }: TextInlineProps) {
     return (
         <Text {...restProps} size={size} color={color} type="h2">
             {children}
@@ -77,7 +77,7 @@ Text.h3 = function h3({ size = "base", color = "primary", children, ...restProps
         </Text>
     );
 };
-Text.h4 = function h4({ size = "base", color = "primary", children, ...restProps }: TextInlineProps) {
+Text.h4 = function h4({ size = "tiny", color = "primary", children, ...restProps }: TextInlineProps) {
     return (
         <Text {...restProps} size={size} color={color} type="h4">
             {children}
@@ -85,14 +85,14 @@ Text.h4 = function h4({ size = "base", color = "primary", children, ...restProps
     );
 };
 
-Text.h5 = function h5({ size = "base", color = "primary", children, ...restProps }: TextInlineProps) {
+Text.h5 = function h5({ size = "sm", color = "primary", children, ...restProps }: TextInlineProps) {
     return (
         <Text {...restProps} size={size} color={color} type="h5">
             {children}
         </Text>
     );
 };
-Text.h6 = function h6({ size = "base", color = "primary", children, ...restProps }: TextInlineProps) {
+Text.h6 = function xs({ size = "base", color = "primary", children, ...restProps }: TextInlineProps) {
     return (
         <Text {...restProps} size={size} color={color} type="h6">
             {children}

@@ -8,10 +8,17 @@ import useWallet from "services/useWallet";
 import useSWR from "swr";
 import { addCustomToken } from "chains";
 import ConnectWallet from "./ConnectWallet";
+import { formatNumberWithCommas } from "utils/number";
 
 const WrapperDetailsBox = styled.div`
     max-width: 379px;
-    min-width: 288px;
+
+    @media (min-width: 760px) {
+        min-width: 360px;
+    }
+    @media (max-width: 760px) {
+        min-width: 288px;
+    }
     width: 100%;
     height: 380px;
     background: ${({ theme }) => theme.colors?.["secondary_10"]};
@@ -37,7 +44,7 @@ export function DetailsBox() {
             <Icon src="wallet" />
             <ConnectWallet type="icon" className="pt-5 " />
             <Text.h1 className="py-3 text-center">
-                Balance : {balance}({tokenName}){" "}
+                Balance : {formatNumberWithCommas(balance)}({tokenName}){" "}
             </Text.h1>
             <Button
                 onClick={() => {
@@ -48,7 +55,7 @@ export function DetailsBox() {
                 Send Token
             </Button>
             <Text.h4 color="secondary" className="pt-5">
-                haven't ({tokenName}) token on your wallet ?{" "}
+                Have you ({tokenName}) token on your wallet ?{" "}
             </Text.h4>
             <Text.span color="yellow" className="underline" onClick={addCustomToken}>
                 Please click to add

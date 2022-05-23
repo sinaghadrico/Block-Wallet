@@ -1,9 +1,7 @@
 import styled from "styled-components";
 import { Icon } from "@ui-components/Icon";
-
 import { Box } from "@ui-components/Box";
 import { Text } from "@ui-components/Text";
-
 import MetaMaskCard from "components/connectors/MetaMaskCard";
 import { useWeb3React } from "@web3-react/core";
 

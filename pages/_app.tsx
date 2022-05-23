@@ -1,7 +1,7 @@
 import "../global.scss";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Layout from "components/Layout";
-import ProviderExample from "components/ProviderExample";
+import ProviderWeb3 from "components/ProviderWeb3";
 
 const colors = {
     primary: "#FFFFFF",
@@ -179,6 +179,8 @@ export default function MyApp({ Component, pageProps }) {
           ::-webkit-scrollbar-thumb:hover {
               background:  ${theme.colors["blue"]};
           }
+         
+
     }
   `;
 
@@ -187,11 +189,11 @@ export default function MyApp({ Component, pageProps }) {
             <GlobalStyle />
 
             <ThemeProvider theme={theme}>
-                <ProviderExample>
+                <ProviderWeb3>
                     <Layout>
                         <Component {...pageProps} />
                     </Layout>
-                </ProviderExample>
+                </ProviderWeb3>
             </ThemeProvider>
         </>
     );

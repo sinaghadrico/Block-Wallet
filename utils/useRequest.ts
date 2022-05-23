@@ -5,7 +5,7 @@ const useRequest = () => {
 
     const request = useMemo(() => {
         return axios.create({
-            baseURL: "https://api-rinkeby.etherscan.io/api",
+            baseURL: process.env.baseURL,
             timeout: 10000,
             headers: {
                 "content-type": "application/json",
@@ -21,19 +21,19 @@ const useRequest = () => {
         },
     );
 
-    const get = (arg: any) => {
+    const get = (arg: string) => {
         return request.get(arg);
     };
-    const deleteRequest = (arg: any) => {
+    const deleteRequest = (arg: string) => {
         return request.delete(arg);
     };
-    const post = (arg: any, body: any) => {
+    const post = (arg: string, body: any) => {
         return request.post(arg, body);
     };
-    const patch = (arg: any, body: any) => {
+    const patch = (arg: string, body: any) => {
         return request.patch(arg, body);
     };
-    const put = (arg: any, body: any) => {
+    const put = (arg: string, body: any) => {
         return request.put(arg, body);
     };
 

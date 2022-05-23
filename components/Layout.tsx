@@ -1,15 +1,9 @@
 import styled from "styled-components";
-import Loading from "components/Loading";
-import { useRouter } from "next/router";
 import Router from "next/router";
 import { useState, useEffect } from "react";
 import { Transition } from "@headlessui/react";
-import { useWeb3React } from "@web3-react/core";
 
-export default function Layout({ children }) {
-    const { asPath } = useRouter();
-    const { chainId } = useWeb3React();
-
+export default function Layout({ children }: { children: JSX.Element | JSX.Element[] }) {
     const [loading, SetLoading] = useState(false);
 
     useEffect(() => {

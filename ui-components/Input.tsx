@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import type { InputHTMLAttributes } from "react";
 import { memo } from "react";
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+    label?: string;
+}
 
 const CustomWrapperInput = memo(styled.div`
     width: 100%;
@@ -25,9 +27,17 @@ const CustomInput = memo(styled.input`
     }
     background: transparent;
 `);
-export function Input({ className, ...restProps }: InputProps) {
+const CustomInputLabel = memo(styled.label`
+    font-size: ${({ theme }) => theme.fonts?.["base"]?.["size"]};
+    font-weight: ${({ theme }) => theme.fonts?.["base"]?.["weight"]};
+    font-style: ${({ theme }) => theme.fonts?.["base"]?.["style"]};
+    line-height: 19px;
+    color: ${({ theme }) => theme.colors?.["secondary"]};
+`);
+export function Input({ className, label, ...restProps }: InputProps) {
     return (
         <CustomWrapperInput className={className}>
+            {label && <CustomInputLabel htmlFor={restProps?.name}>{label}</CustomInputLabel>}
             <CustomInput autoComplete="off" {...restProps} />
         </CustomWrapperInput>
     );

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useReducer, createContext } from "react";
 
 const ACTION_TYPES = {};
@@ -13,7 +12,7 @@ const reducer = (state: any, action: any) => {
             return state;
     }
 };
-const WebWalletProvider = ({ children }: any) => {
+const WebWalletProvider = ({ children }: { children: JSX.Element | JSX.Element[] }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const value = { state, dispatch };
     return <WebWalletContext.Provider value={value}>{children}</WebWalletContext.Provider>;

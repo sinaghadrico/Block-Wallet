@@ -1,19 +1,13 @@
 import { MouseEventHandler } from "react";
 import styled from "styled-components";
-import { Text } from "@ui-components/Text";
 import { Icon } from "@ui-components/Icon";
-
-interface KeyValue {
-    key: string;
-    value: string;
-}
 
 interface CoinLabelProps {
     color?: "purpleLighter" | "green";
-    coin: KeyValue;
+    coin: string;
     onClick: MouseEventHandler<HTMLDivElement>;
 }
-export default function CoinLabel({ color = "purpleLighter", coin, onClick }: CoinLabelProps) {
+export default function CoinLabel({ coin, onClick }: CoinLabelProps) {
     const CoinLabel = styled.span`
         display: flex;
         flex-direction: row;
@@ -33,11 +27,8 @@ export default function CoinLabel({ color = "purpleLighter", coin, onClick }: Co
     `;
 
     return (
-        <CoinLabel key={coin?.key} onClick={onClick}>
-            <Icon src={"btc"} width={25} height={25} /> {coin?.value}{" "}
-            <Text.p color={color} className="px-2 underline">
-                Change
-            </Text.p>
+        <CoinLabel key={coin} onClick={onClick}>
+            <Icon src={"eth"} width={25} height={25} /> {coin}
         </CoinLabel>
     );
 }

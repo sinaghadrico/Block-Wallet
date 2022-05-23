@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Image, { ImageProps } from "next/image";
 const TradeIcon = dynamic(() => import("../assets/svg-file/trade"));
@@ -13,7 +12,7 @@ const WalletIcon = dynamic(() => import("../assets/svg-file/wallet"));
 const MetamaskIcon = dynamic(() => import("../assets/svg-file/metamask"));
 const TrustIcon = dynamic(() => import("../assets/svg-file/trust"));
 interface IconProps extends ImageProps {
-    src: any;
+    src: string;
 }
 
 const getIcon = (src: string) => {

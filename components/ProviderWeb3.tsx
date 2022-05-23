@@ -32,7 +32,7 @@ function Child() {
     return null;
 }
 
-export default function ProviderExample(props) {
+export default function ProviderWeb3(props) {
     return (
         <Web3ReactProvider connectors={connectors}>
             <Child />

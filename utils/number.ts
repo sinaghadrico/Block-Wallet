@@ -1,4 +1,4 @@
-/* eslint-disable prefer-const */
+
 const validNumberRegex = new RegExp("^[0-9]+$");
 
 const extractNumbers = (str: string): string[] => {
@@ -9,7 +9,7 @@ const parseValueToNumber = (value: string): string => {
     return value?.indexOf(",") >= 0 ? value?.replaceAll(",", "") : value;
 };
 
-const formatNumberWithCommas = (_value: any = ""): string => {
+const formatNumberWithCommas = (_value:  number | string = ""): string => {
     let value = _value?.toString();
     // return value?.toString()?.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     if ([null, undefined].includes(value)) {
