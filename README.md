@@ -22,3 +22,12 @@ App to send Custom ERC720 Token ( (Z03) token 0x8F8Ceeb26b915c1Fb338581B86A9C61f
 ![Transaction history](transaction-history.PNG)
 ![Transfer](transfer.PNG)
 ![Success transfer](success-transfer.PNG)
+
+
+## Installation
+
+**Clone the repository:**
+   ```bash
+   git clone 
+   cd 
+ ```
